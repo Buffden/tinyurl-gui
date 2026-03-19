@@ -1,0 +1,359 @@
+.shorten-card, .shorten-card * {
+	box-sizing: border-box;
+}
+.shorten-card {
+	max-width: 100%;
+	width: 100%;
+	overflow-x: hidden !important;
+}
+.shorten-card__body, .shorten-card__row, .shorten-card__input, .shorten-card__main-btn, .shorten-card__terms {
+	max-width: 100%;
+	min-width: 0;
+	overflow-x: hidden;
+}
+.shorten-card__input {
+	width: 100%;
+}
+.shorten-card__row {
+	display: flex;
+	flex-direction: row;
+	gap: 0.5rem;
+	margin-bottom: 1.1rem;
+	width: 100%;
+}
+.shorten-card__main-btn {
+	width: 100%;
+	background: #1aaf5d;
+	color: #fff;
+	border: none;
+	border-radius: 8px;
+	padding: 0.9rem 1.2rem;
+	font-size: 1.15rem;
+	font-weight: 700;
+	margin-top: 0.5rem;
+	margin-bottom: 0.7rem;
+	cursor: pointer;
+	transition: background 0.2s;
+}
+.shorten-card__main-btn:hover {
+	background: #1797c9;
+}
+.shorten-card__hint {
+	font-size: 0.85rem;
+	color: #888;
+	margin-top: 0.1rem;
+}
+.shorten-card__terms {
+	font-size: 0.85rem;
+	color: #444950;
+	margin-top: 0.7rem;
+	text-align: left;
+}
+.shorten-card__terms a {
+	color: #1797c9;
+	text-decoration: underline;
+}
+.shorten-card__body {
+	overflow: visible !important;
+}
+.shorten-card {
+	overflow: visible !important;
+}
+// Custom styles for Angular Material tabs to match reference image
+.shorten-tabs {
+	background: #fff;
+	border-radius: 16px 16px 0 0;
+	box-shadow: 0 2px 16px 0 rgba(80, 63, 205, 0.08);
+	min-width: 370px;
+	max-width: 420px;
+	width: 100%;
+	.mat-tab-header {
+		border-bottom: none;
+		background: transparent;
+		border-radius: 16px 16px 0 0;
+		margin-bottom: 0;
+		.mat-tab-labels {
+			display: flex;
+			justify-content: space-between;
+			width: 100%;
+		}
+		.mat-tab-label {
+			flex: 1 1 50%;
+			font-family: 'Montserrat', Arial, sans-serif;
+			font-weight: 800;
+			font-size: 1.15rem;
+			color: #fff;
+			background: #1797c9;
+			border-radius: 16px 16px 0 0;
+			margin: 0 2px;
+			min-height: 56px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			transition: background 0.2s, color 0.2s;
+			box-shadow: none;
+			border: none;
+			z-index: 1;
+		}
+		.mat-tab-label.mat-tab-label-active {
+			background: #fff;
+			color: #1797c9;
+			box-shadow: 0 2px 8px 0 rgba(80, 63, 205, 0.04);
+			font-size: 1.18rem;
+			z-index: 2;
+		}
+		.mat-ink-bar {
+			display: none;
+		}
+	}
+	.mat-tab-body-wrapper {
+		border-radius: 0 0 16px 16px;
+		background: #fff;
+		box-shadow: none;
+	}
+}
+
+// Hero Section Background
+.hero {
+	min-height: 100vh;
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+}
+.hero-bg {
+	background: none;
+	width: 100%;
+	padding: 3rem 0;
+	flex: 1 1 auto;
+}
+// FAQ Section Styles
+.faq-section {
+	background: #fafbfc;
+	padding: 0 0 4rem 0;
+	width: 100vw;
+	display: flex;
+	justify-content: center;
+}
+.faq-container {
+	display: flex;
+	flex-direction: row;
+	align-items: flex-start;
+	max-width: 1400px;
+	width: 100%;
+	margin: 0 auto;
+	gap: 2.5rem;
+	padding: 3rem 2rem 0 2rem;
+}
+.faq-title {
+	font-family: 'Montserrat', Arial, sans-serif;
+	font-weight: 800;
+	font-size: 2.4rem;
+	color: #23272f;
+	min-width: 320px;
+	max-width: 340px;
+	line-height: 1.1;
+	margin-top: 1.5rem;
+}
+.faq-list {
+	flex: 1 1 0;
+	min-width: 0;
+}
+.faq-accordion {
+	width: 100%;
+	background: transparent;
+	box-shadow: none;
+}
+.faq-question {
+	font-family: 'Montserrat', Arial, sans-serif;
+	font-weight: 800;
+	font-size: 1.5rem;
+	color: #23272f;
+}
+.faq-answer {
+	font-family: 'LINE Seed JP', 'Ultra', Arial, sans-serif;
+	font-size: 1.08rem;
+	color: #23272f;
+	margin-left: 2.2rem;
+	margin-top: 0.5rem;
+	margin-bottom: 0.5rem;
+	line-height: 1.6;
+}
+mat-expansion-panel {
+	background: #fff;
+	box-shadow: none;
+	border-radius: 0;
+	border-bottom: 1px solid #e5e7eb;
+}
+mat-expansion-panel:last-child {
+	border-bottom: none;
+}
+mat-expansion-panel-header {
+	padding-left: 0;
+	padding-right: 0;
+	min-height: 64px !important;
+}
+mat-expansion-panel-header .mat-content {
+	margin: 0;
+}
+
+// Centered Container
+.hero-container {
+	max-width: 1000px;
+	margin: 0 auto;
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+	gap: 2.5rem;
+	width: 100%;
+	padding: 0 2rem;
+}
+
+
+.hero__left--fixed {
+	width: 420px;
+	min-width: 340px;
+	max-width: 480px;
+	color: #181c32;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	gap: 1.5rem;
+	background: transparent;
+}
+.hero__shorten-title {
+	font-size: 2.8rem;
+	font-weight: 700;
+	line-height: 1.1;
+	margin-bottom: 0.5rem;
+}
+.shorten-bold, .simplify-bold, .share-bold {
+  font-family: 'Montserrat', Arial, sans-serif;
+  font-weight: 800;
+  /* ...other styles... */
+}
+.shorten-bold {
+	color: #181c32;
+}
+.simplify-bold {
+	color: #7b3aed;
+}
+.share-bold {
+	color: #1aaf5d;
+}
+.hero__subtitle {
+	color: #444950;
+	font-size: 1.1rem;
+	font-weight: 500;
+	margin-top: 0.5rem;
+}
+
+.hero__right--fixed {
+	width: 420px;
+	min-width: 340px;
+	max-width: 480px;
+	display: flex;
+	justify-content: flex-end;
+}
+
+// Shorten Card Styles
+.shorten-card {
+	background: #fff;
+	border-radius: 16px;
+	box-shadow: 0 2px 16px 0 rgba(80, 63, 205, 0.08);
+	padding: 2rem 2rem 1.5rem 2rem;
+	min-width: 370px;
+	max-width: 420px;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	gap: 1.25rem;
+}
+.shorten-card__header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	font-size: 1.2rem;
+	font-weight: 600;
+	margin-bottom: 1rem;
+}
+.shorten-card__qr-btn {
+	background: #1797c9;
+	color: #fff;
+	border: none;
+	border-radius: 8px;
+	padding: 0.5rem 1rem;
+	font-weight: 600;
+	cursor: pointer;
+}
+.shorten-card__body {
+	display: flex;
+	flex-direction: column;
+	gap: 0.75rem;
+}
+.shorten-card__label {
+	font-size: 0.98rem;
+	font-weight: 500;
+	margin-bottom: 0.25rem;
+	color: #0a2a43;
+}
+.shorten-card__input {
+	width: 100%;
+	padding: 0.6rem 0.9rem;
+	border-radius: 6px;
+	border: 1.5px solid #c3d0e6;
+	font-size: 1rem;
+	margin-bottom: 0.5rem;
+}
+.shorten-card__input--result {
+	background: #e6f7ee;
+	color: #1797c9;
+	font-weight: 600;
+	border: 1.5px solid #1797c9;
+}
+.shorten-card__result-row {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+}
+.shorten-card__copy-btn {
+	background: #fff;
+	border: 1.5px solid #c3d0e6;
+	border-radius: 6px;
+	padding: 0.4rem 0.7rem;
+	font-size: 1.1rem;
+	cursor: pointer;
+}
+.shorten-card__actions {
+	display: flex;
+	gap: 0.5rem;
+	margin-top: 0.5rem;
+}
+.shorten-card__action-btn {
+	background: #0a2a43;
+	color: #fff;
+	border: none;
+	border-radius: 6px;
+	padding: 0.5rem 1rem;
+	font-size: 0.98rem;
+	font-weight: 500;
+	cursor: pointer;
+	transition: background 0.2s;
+}
+.shorten-card__action-btn:hover {
+	background: #1797c9;
+}
+.shorten-card__another-btn {
+	background: #1aaf5d;
+	color: #fff;
+	border: none;
+	border-radius: 8px;
+	padding: 0.7rem 1.2rem;
+	font-size: 1.05rem;
+	font-weight: 600;
+	margin-top: 1rem;
+	cursor: pointer;
+	transition: background 0.2s;
+}
+.shorten-card__another-btn:hover {
+	background: #1797c9;
+}
