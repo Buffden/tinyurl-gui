@@ -1,0 +1,23 @@
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 2rem 1.25rem 1.5rem;
+  background: #fff;
+  border-radius: 16px 16px 0 0;
+  box-shadow: 0 2px 16px 0 rgba(80, 63, 205, 0.04);
+  font-family: 'Inter', sans-serif;
+}
+
+.navbar__left {
+  display: flex;
+  align-items: center;
+}
+
+.navbar__brand {
+  font-family: 'Montserrat', Arial, sans-serif;
+  font-weight: 800;
+  font-size: 1.25rem;
+  letter-spacing: -1px;
+  color: #181c32;
+}
