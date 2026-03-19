@@ -1,0 +1,34 @@
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: dev                         # use dev stage for local development
+    container_name: tinyurl-frontend
+    ports:
+      - "4200:4200"
+    volumes:
+      - .:/app                            # hot reload — mounts source into container
+      - /app/node_modules                 # prevent host node_modules from overwriting
+    environment:
+      - NODE_ENV=development
+    networks:
+      - tinyurl_public                    # joins parent stack's public network to reach nginx
+    depends_on:
+      - nginx-check
+    restart: unless-stopped
+
+  # Lightweight check to surface a clear error if the backend stack isn't up
+  nginx-check:
+    image: alpine:3.19
+    container_name: tinyurl-nginx-check
+    command: >
+      sh -c "until wget -qO- http://tinyurl-nginx/actuator/health > /dev/null 2>&1;
+             do echo 'Waiting for backend...'; sleep 3; done; echo 'Backend is up'"
+    networks:
+      - tinyurl_public
+    restart: "no"
+
+networks:
+  tinyurl_public:
+    external: true                        # created by parent docker-compose in /tinyurl
