@@ -6,7 +6,7 @@
                     <h1 class="hero__shorten-title">
                         <span class="shorten-bold">SHORTEN.</span><br />
                         <span class="simplify-bold">SIMPLIFY.</span><br />
-                        <span class="share-bold">SUCCEED.</span>
+                        <span class="succeed-bold">SUCCEED.</span>
                     </h1>
                     <p class="hero__subtitle">Transform long, cluttered URLs into high-end digital shortcuts with
                         surgical precision.</p>
@@ -15,12 +15,16 @@
                     <mat-tab-group class="shorten-tabs" mat-stretch-tabs>
 
                         <!-- Shorten a Link -->
-                        <mat-tab label="Shorten a Link">
+                        <mat-tab>
+                            <ng-template matTabLabel>
+                                <img width="20" height="20" src="https://img.icons8.com/glyph-neue/64/fantasy--v1.png" alt="" class="tab-icon" />
+                                Shorten a Link
+                            </ng-template>
                             <div class="shorten-card">
                                 <div class="shorten-card__body">
                                     <div class="shorten-card__field">
                                         <label class="shorten-card__label" for="long-url">
-                                            <span class="label-icon">📍</span> Long URL <span class="label-required">*</span>
+                                            <span class="label-icon"></span> Long URL <span class="label-required">*</span>
                                         </label>
                                         <input class="shorten-card__input"
                                             id="long-url"
@@ -68,6 +72,7 @@
                                         </div>
                                     </div>
                                     <button class="shorten-card__main-btn" (click)="onShorten()" [disabled]="loading">
+                                        <img *ngIf="!loading" width="22" height="22" src="https://img.icons8.com/glyph-neue/64/fantasy--v1.png" alt="" class="btn-icon" />
                                         <span *ngIf="!loading">{{ shortUrl ? 'Shorten Another Link' : 'Shorten Link' }}</span>
                                         <span *ngIf="loading">Shortening...</span>
                                     </button>
@@ -81,12 +86,16 @@
                         </mat-tab>
 
                         <!-- Generate QR Code -->
-                        <mat-tab label="Generate QR Code">
+                        <mat-tab>
+                            <ng-template matTabLabel>
+                                <span class="material-symbols-outlined tab-icon">qr_code</span>
+                                Generate QR Code
+                            </ng-template>
                             <div class="shorten-card">
                                 <div class="shorten-card__body">
                                     <div class="shorten-card__field" *ngIf="!qrGenerated">
                                         <label class="shorten-card__label" for="qr-url">
-                                            <span class="label-icon">📍</span> Destination URL <span class="label-required">*</span>
+                                            <span class="label-icon"></span> Destination URL <span class="label-required">*</span>
                                         </label>
                                         <input class="shorten-card__input"
                                             id="qr-url"
@@ -140,6 +149,7 @@
 
                                     <div *ngIf="qrError" class="shorten-card__error">{{ qrError }}</div>
                                     <button class="shorten-card__main-btn" (click)="onGenerateQr()">
+                                        <span class="material-symbols-outlined btn-icon">qr_code</span>
                                         {{ qrGenerated ? 'Generate Another QR' : 'Generate QR Code' }}
                                     </button>
                                     <div class="shorten-card__terms">

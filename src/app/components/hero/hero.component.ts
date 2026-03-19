@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatTabsModule } from '@angular/material/tabs';
@@ -13,9 +13,6 @@ import { UrlShortenerService, ShortenResponse } from '../../services/url-shorten
   styleUrl: './hero.component.scss'
 })
 export class HeroComponent {
-  @ViewChild('qrCanvas', { static: false }) qrCanvasRef!: ElementRef;
-  @ViewChild('qrSvg', { static: false }) qrSvgRef!: ElementRef;
-
   // Shorten tab state
   longUrl = '';
   expiresInDays: number | null = null;
