@@ -3,17 +3,17 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-      target: dev                         # use dev stage for local development
+      target: dev
     container_name: tinyurl-frontend
-    ports:
-      - "4200:4200"
     volumes:
-      - .:/app                            # hot reload — mounts source into container
-      - /app/node_modules                 # prevent host node_modules from overwriting
+      - .:/app
+      - /app/node_modules
     environment:
       - NODE_ENV=development
+    ports:
+      - "4200:4200"
     networks:
-      - tinyurl_public                    # joins parent stack's public network to reach nginx
+      - tinyurl_public
     depends_on:
       - nginx-check
     restart: unless-stopped
