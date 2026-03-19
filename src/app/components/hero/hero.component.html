@@ -13,6 +13,8 @@
                 </div>
                 <div class="hero__right hero__right--fixed">
                     <mat-tab-group class="shorten-tabs" mat-stretch-tabs>
+
+                        <!-- Shorten a Link -->
                         <mat-tab label="Shorten a Link">
                             <div class="shorten-card">
                                 <div class="shorten-card__body">
@@ -26,7 +28,7 @@
                                             placeholder="Paste long URL here"
                                             autocomplete="off"
                                             [(ngModel)]="longUrl"
-                                            [disabled]="loading" />
+                                            [disabled]="loading || !!shortUrl" />
                                     </div>
                                     <div class="shorten-card__field">
                                         <label class="shorten-card__label" for="expires-in-days">Expiry (days, optional)</label>
@@ -37,7 +39,7 @@
                                             max="3650"
                                             placeholder="e.g. 30"
                                             [(ngModel)]="expiresInDays"
-                                            [disabled]="loading" />
+                                            [disabled]="loading || !!shortUrl" />
                                     </div>
                                     <div *ngIf="shortUrl" class="shorten-card__result">
                                         <label class="shorten-card__label" for="short-url">TinyURL Link</label>
@@ -66,7 +68,7 @@
                                         </div>
                                     </div>
                                     <button class="shorten-card__main-btn" (click)="onShorten()" [disabled]="loading">
-                                        <span *ngIf="!loading">Shorten Link</span>
+                                        <span *ngIf="!loading">{{ shortUrl ? 'Shorten Another Link' : 'Shorten Link' }}</span>
                                         <span *ngIf="loading">Shortening...</span>
                                     </button>
                                     <div *ngIf="error" class="shorten-card__error">{{ error }}</div>
@@ -77,20 +79,69 @@
                                 </div>
                             </div>
                         </mat-tab>
+
+                        <!-- Generate QR Code -->
                         <mat-tab label="Generate QR Code">
                             <div class="shorten-card">
                                 <div class="shorten-card__body">
-                                    <div class="shorten-card__field">
+                                    <div class="shorten-card__field" *ngIf="!qrGenerated">
                                         <label class="shorten-card__label" for="qr-url">
                                             <span class="label-icon">📍</span> Destination URL <span class="label-required">*</span>
                                         </label>
                                         <input class="shorten-card__input"
                                             id="qr-url"
                                             type="text"
-                                            placeholder="Paste long URL here"
-                                            autocomplete="off" />
+                                            placeholder="Paste any URL here"
+                                            autocomplete="off"
+                                            [(ngModel)]="qrUrl" />
                                     </div>
-                                    <button class="shorten-card__main-btn">Generate QR Code</button>
+
+                                    <div *ngIf="qrGenerated" class="qr-result-layout">
+                                        <!-- Left: QR image -->
+                                        <div class="qr-result-left">
+                                            <div class="qr-canvas-wrap">
+                                                <qrcode [qrdata]="qrGenerated" [width]="150" [errorCorrectionLevel]="'M'" [elementType]="'canvas'"></qrcode>
+                                            </div>
+                                            <!-- Hidden SVG for SVG download -->
+                                            <div class="qr-svg-wrap" style="display:none;">
+                                                <qrcode [qrdata]="qrGenerated" [width]="256" [errorCorrectionLevel]="'M'" [elementType]="'svg'"></qrcode>
+                                            </div>
+                                        </div>
+                                        <!-- Right: title + download buttons -->
+                                        <div class="qr-result-right">
+                                            <p class="qr-download-title">Download Your QR Code</p>
+                                            <button class="qr-dl-btn" (click)="downloadSvg()">
+                                                <span class="material-symbols-outlined">download</span> Download SVG
+                                            </button>
+                                            <button class="qr-dl-btn" (click)="downloadPng()">
+                                                <span class="material-symbols-outlined">download</span> Download PNG
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <!-- Info rows -->
+                                    <div *ngIf="qrGenerated" class="qr-info-rows">
+                                        <div class="qr-info-row">
+                                            <span class="qr-info-label">Destination URL</span>
+                                            <span class="qr-info-value" [title]="qrGenerated">{{ qrGenerated }}</span>
+                                        </div>
+                                        <div class="qr-info-row" *ngIf="qrShortUrl">
+                                            <span class="qr-info-label">TinyURL Link</span>
+                                            <span class="qr-info-value">{{ qrShortUrl }}</span>
+                                            <button class="qr-copy-btn" (click)="copyToClipboard(qrShortUrl)" title="Copy">
+                                                <span class="material-symbols-outlined">content_copy</span>
+                                            </button>
+                                        </div>
+                                        <div *ngIf="qrLoading" class="qr-info-row">
+                                            <span class="qr-info-label">TinyURL Link</span>
+                                            <span class="qr-info-value qr-info-loading">Shortening...</span>
+                                        </div>
+                                    </div>
+
+                                    <div *ngIf="qrError" class="shorten-card__error">{{ qrError }}</div>
+                                    <button class="shorten-card__main-btn" (click)="onGenerateQr()">
+                                        {{ qrGenerated ? 'Generate Another QR' : 'Generate QR Code' }}
+                                    </button>
                                     <div class="shorten-card__terms">
                                         By clicking Generate QR Code, you agree with our <a href="#" target="_blank">Terms of Service</a>,
                                         <a href="#" target="_blank">Privacy Policy</a>, and <a href="#" target="_blank">Use of Cookies</a>.
@@ -98,6 +149,7 @@
                                 </div>
                             </div>
                         </mat-tab>
+
                     </mat-tab-group>
                 </div>
             </div>
