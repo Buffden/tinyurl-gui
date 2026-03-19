@@ -17,3 +17,25 @@
   font-weight: 800;
   letter-spacing: -1px;
 }
+
+.footer__links {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  a {
+    display: flex;
+    align-items: center;
+    opacity: 0.8;
+    transition: opacity 0.18s, transform 0.18s;
+
+    &:hover {
+      opacity: 1;
+      transform: translateY(-2px);
+    }
+  }
+
+  img {
+    display: block;
+  }
+}
