@@ -288,45 +288,95 @@ mat-expansion-panel-header .mat-content {
 .shorten-card__body {
 	display: flex;
 	flex-direction: column;
-	gap: 0.75rem;
+	gap: 1rem;
+}
+.shorten-card__field {
+	display: flex;
+	flex-direction: column;
+	gap: 0.35rem;
 }
 .shorten-card__label {
-	font-size: 0.98rem;
-	font-weight: 500;
-	margin-bottom: 0.25rem;
+	font-size: 0.93rem;
+	font-weight: 600;
 	color: #0a2a43;
+	display: flex;
+	align-items: center;
+	gap: 0.25rem;
+}
+.label-icon {
+	font-size: 1em;
+	vertical-align: middle;
+}
+.label-required {
+	color: #e53935;
 }
 .shorten-card__input {
 	width: 100%;
-	padding: 0.6rem 0.9rem;
+	padding: 0.65rem 0.9rem;
 	border-radius: 6px;
 	border: 1.5px solid #c3d0e6;
 	font-size: 1rem;
-	margin-bottom: 0.5rem;
+	outline: none;
+	transition: border-color 0.2s;
+	&:focus {
+		border-color: #1797c9;
+	}
 }
 .shorten-card__input--result {
 	background: #e6f7ee;
 	color: #1797c9;
 	font-weight: 600;
-	border: 1.5px solid #1797c9;
+	border: 1.5px solid #1aaf5d;
+	cursor: default;
 }
-.shorten-card__result-row {
+.shorten-card__result {
 	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+	padding-top: 0.25rem;
+	border-top: 1.5px solid #e8edf5;
+}
+.shorten-card__action-bar {
+	display: flex;
+	gap: 0.5rem;
+	width: 100%;
+}
+.shorten-card__action-tile {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
 	align-items: center;
-	gap: 0.5rem;
-}
-.shorten-card__copy-btn {
-	background: #fff;
-	border: 1.5px solid #c3d0e6;
-	border-radius: 6px;
-	padding: 0.4rem 0.7rem;
-	font-size: 1.1rem;
+	justify-content: center;
+	gap: 0.3rem;
+	background: #f4f7fb;
+	border: 1.5px solid #dde4ef;
+	border-radius: 8px;
+	padding: 0.55rem 0.25rem;
 	cursor: pointer;
+	transition: background 0.18s, border-color 0.18s;
+	.action-icon {
+		font-size: 1.3rem;
+		line-height: 1;
+		font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+	}
+	.action-label {
+		font-size: 0.7rem;
+		font-weight: 700;
+		color: #0a2a43;
+		letter-spacing: 0.02em;
+		text-transform: uppercase;
+	}
+	&:hover {
+		background: #e6f7ee;
+		border-color: #1aaf5d;
+		.action-label {
+			color: #1aaf5d;
+		}
+	}
 }
-.shorten-card__actions {
-	display: flex;
-	gap: 0.5rem;
-	margin-top: 0.5rem;
+.shorten-card__error {
+	color: #e53935;
+	font-size: 0.93rem;
 }
 .shorten-card__action-btn {
 	background: #0a2a43;

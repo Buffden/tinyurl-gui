@@ -12,29 +12,67 @@
                         surgical precision.</p>
                 </div>
                 <div class="hero__right hero__right--fixed">
-                    <mat-tab-group class="shorten-tabs"
-                                   mat-stretch-tabs>
+                    <mat-tab-group class="shorten-tabs" mat-stretch-tabs>
                         <mat-tab label="Shorten a Link">
                             <div class="shorten-card">
                                 <div class="shorten-card__body">
-                                    <label class="shorten-card__label"
-                                           for="long-url"> <span
-                                              style="font-size:1.1em;vertical-align:middle;">📍</span> Long URL <span
-                                              style="color:#e53935">*</span></label>
-                                    <input class="shorten-card__input"
-                                           id="long-url"
-                                           type="text"
-                                           placeholder="Paste long URL here"
-                                           autocomplete="off" />
-                                    <div class="shorten-card__row">
-                                        <div style="width:2.5rem;"></div>
+                                    <div class="shorten-card__field">
+                                        <label class="shorten-card__label" for="long-url">
+                                            <span class="label-icon">📍</span> Long URL <span class="label-required">*</span>
+                                        </label>
+                                        <input class="shorten-card__input"
+                                            id="long-url"
+                                            type="text"
+                                            placeholder="Paste long URL here"
+                                            autocomplete="off"
+                                            [(ngModel)]="longUrl"
+                                            [disabled]="loading" />
                                     </div>
-                                    <button class="shorten-card__main-btn">Shorten Link</button>
+                                    <div class="shorten-card__field">
+                                        <label class="shorten-card__label" for="expires-in-days">Expiry (days, optional)</label>
+                                        <input class="shorten-card__input"
+                                            id="expires-in-days"
+                                            type="number"
+                                            min="1"
+                                            max="3650"
+                                            placeholder="e.g. 30"
+                                            [(ngModel)]="expiresInDays"
+                                            [disabled]="loading" />
+                                    </div>
+                                    <div *ngIf="shortUrl" class="shorten-card__result">
+                                        <label class="shorten-card__label" for="short-url">TinyURL Link</label>
+                                        <input class="shorten-card__input shorten-card__input--result"
+                                            id="short-url"
+                                            type="text"
+                                            [value]="shortUrl"
+                                            readonly />
+                                        <div class="shorten-card__action-bar">
+                                            <button class="shorten-card__action-tile" (click)="copyToClipboard(shortUrl)" title="Copy">
+                                                <span class="material-symbols-outlined action-icon">content_copy</span>
+                                                <span class="action-label">Copy</span>
+                                            </button>
+                                            <button class="shorten-card__action-tile" (click)="shareUrl(shortUrl)" title="Share">
+                                                <span class="material-symbols-outlined action-icon">share</span>
+                                                <span class="action-label">Share</span>
+                                            </button>
+                                            <button class="shorten-card__action-tile" (click)="visitUrl(shortUrl)" title="Visit URL">
+                                                <span class="material-symbols-outlined action-icon">open_in_new</span>
+                                                <span class="action-label">Visit</span>
+                                            </button>
+                                            <button class="shorten-card__action-tile" title="QR Code">
+                                                <span class="material-symbols-outlined action-icon">qr_code</span>
+                                                <span class="action-label">QR</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <button class="shorten-card__main-btn" (click)="onShorten()" [disabled]="loading">
+                                        <span *ngIf="!loading">Shorten Link</span>
+                                        <span *ngIf="loading">Shortening...</span>
+                                    </button>
+                                    <div *ngIf="error" class="shorten-card__error">{{ error }}</div>
                                     <div class="shorten-card__terms">
-                                        By clicking Shorten Link, you agree with our <a href="#"
-                                           target="_blank">Terms of Service</a>, <a href="#"
-                                           target="_blank">Privacy Policy</a>, and <a href="#"
-                                           target="_blank">Use of Cookies</a>.
+                                        By clicking Shorten Link, you agree with our <a href="#" target="_blank">Terms of Service</a>,
+                                        <a href="#" target="_blank">Privacy Policy</a>, and <a href="#" target="_blank">Use of Cookies</a>.
                                     </div>
                                 </div>
                             </div>
@@ -42,20 +80,20 @@
                         <mat-tab label="Generate QR Code">
                             <div class="shorten-card">
                                 <div class="shorten-card__body">
-                                    <label class="shorten-card__label"
-                                           for="qr-url"> <span style="font-size:1.1em;vertical-align:middle;">📍</span>
-                                        Destination URL <span style="color:#e53935">*</span></label>
-                                    <input class="shorten-card__input"
-                                           id="qr-url"
-                                           type="text"
-                                           placeholder="Paste long URL here"
-                                           autocomplete="off" />
+                                    <div class="shorten-card__field">
+                                        <label class="shorten-card__label" for="qr-url">
+                                            <span class="label-icon">📍</span> Destination URL <span class="label-required">*</span>
+                                        </label>
+                                        <input class="shorten-card__input"
+                                            id="qr-url"
+                                            type="text"
+                                            placeholder="Paste long URL here"
+                                            autocomplete="off" />
+                                    </div>
                                     <button class="shorten-card__main-btn">Generate QR Code</button>
                                     <div class="shorten-card__terms">
-                                        By clicking Generate QR Code, you agree with our <a href="#"
-                                           target="_blank">Terms of Service</a>, <a href="#"
-                                           target="_blank">Privacy Policy</a>, and <a href="#"
-                                           target="_blank">Use of Cookies</a>.
+                                        By clicking Generate QR Code, you agree with our <a href="#" target="_blank">Terms of Service</a>,
+                                        <a href="#" target="_blank">Privacy Policy</a>, and <a href="#" target="_blank">Use of Cookies</a>.
                                     </div>
                                 </div>
                             </div>
