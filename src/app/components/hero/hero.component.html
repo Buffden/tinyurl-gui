@@ -36,14 +36,27 @@
                                     </div>
                                     <div class="shorten-card__field">
                                         <label class="shorten-card__label" for="expires-in-days">Expiry (days, optional)</label>
-                                        <input class="shorten-card__input"
-                                            id="expires-in-days"
-                                            type="number"
-                                            min="1"
-                                            max="3650"
-                                            placeholder="e.g. 30"
-                                            [(ngModel)]="expiresInDays"
-                                            [disabled]="loading || !!shortUrl" />
+                                        <div class="date-input-wrap">
+                                            <input class="shorten-card__input"
+                                                id="expires-in-days"
+                                                type="number"
+                                                min="1"
+                                                max="3650"
+                                                placeholder="e.g. 30"
+                                                [(ngModel)]="expiresInDays"
+                                                [disabled]="loading || !!shortUrl" />
+                                            <input class="date-input-hidden"
+                                                id="date-picker-hidden"
+                                                type="date"
+                                                [min]="minDate"
+                                                [max]="maxDate"
+                                                [(ngModel)]="expiryDate"
+                                                (change)="onExpiryDateChange($any($event.target).value)"
+                                                tabindex="-1"
+                                                aria-hidden="true" />
+                                            <span class="date-input__icon material-symbols-outlined"
+                                                (click)="openDatePicker()">calendar_month</span>
+                                        </div>
                                     </div>
                                     <div *ngIf="shortUrl" class="shorten-card__result">
                                         <label class="shorten-card__label" for="short-url">TinyURL Link</label>
@@ -78,8 +91,8 @@
                                     </button>
                                     <div *ngIf="error" class="shorten-card__error">{{ error }}</div>
                                     <div class="shorten-card__terms">
-                                        By clicking Shorten Link, you agree with our <a href="#" target="_blank">Terms of Service</a>,
-                                        <a href="#" target="_blank">Privacy Policy</a>, and <a href="#" target="_blank">Use of Cookies</a>.
+                                        Built on AWS. Secured by Cloudflare. Ready when you are.
+                                        <a href="https://portfolio.buffden.com/" target="_blank" rel="noopener noreferrer">Know more</a>
                                     </div>
                                 </div>
                             </div>
@@ -153,8 +166,8 @@
                                         {{ qrGenerated ? 'Generate Another QR' : 'Generate QR Code' }}
                                     </button>
                                     <div class="shorten-card__terms">
-                                        By clicking Generate QR Code, you agree with our <a href="#" target="_blank">Terms of Service</a>,
-                                        <a href="#" target="_blank">Privacy Policy</a>, and <a href="#" target="_blank">Use of Cookies</a>.
+                                        Built on AWS. Secured by Cloudflare. Ready when you are.
+                                        <a href="https://portfolio.buffden.com/" target="_blank" rel="noopener noreferrer">Know more</a>
                                     </div>
                                 </div>
                             </div>
@@ -164,5 +177,9 @@
                 </div>
             </div>
         </section>
+    </div>
+
+    <div class="scroll-indicator">
+        <span class="scroll-indicator__chevron material-symbols-outlined">expand_more</span>
     </div>
 </section>

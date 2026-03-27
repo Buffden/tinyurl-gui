@@ -1,0 +1,22 @@
+<section class="faq-section">
+  <div class="faq-header">
+    <h2 class="faq-title">Frequently Asked Questions</h2>
+    <p class="faq-subtitle">Everything you need to know about our URL shortener.</p>
+  </div>
+
+  <div class="faq-list">
+    <div
+      class="faq-item"
+      *ngFor="let item of items"
+      [class.faq-item--open]="item.open"
+    >
+      <button class="faq-question" (click)="toggle(item)" [attr.aria-expanded]="item.open">
+        <span class="faq-question-text">{{ item.question }}</span>
+        <span class="faq-chevron material-symbols-outlined">expand_more</span>
+      </button>
+      <div class="faq-answer-wrap">
+        <p class="faq-answer">{{ item.answer }}</p>
+      </div>
+    </div>
+  </div>
+</section>

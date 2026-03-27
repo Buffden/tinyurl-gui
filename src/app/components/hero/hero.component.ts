@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatTabsModule } from '@angular/material/tabs';
@@ -16,6 +16,9 @@ export class HeroComponent {
   // Shorten tab state
   longUrl = '';
   expiresInDays: number | null = null;
+  expiryDate: string = '';
+  readonly minDate: string = this.toDateString(1);
+  readonly maxDate: string = this.toDateString(3650);
   loading = false;
   error: string | null = null;
   shortUrl: string | null = null;
@@ -121,5 +124,28 @@ export class HeroComponent {
     if (typeof url === 'string') {
       window.open(url, '_blank', 'noopener,noreferrer');
     }
+  }
+
+  onExpiryDateChange(value: string): void {
+    if (!value) {
+      this.expiresInDays = null;
+      return;
+    }
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const selected = new Date(value);
+    const diff = Math.round((selected.getTime() - today.getTime()) / (1000 * 60 * 60 * 24));
+    this.expiresInDays = diff > 0 ? diff : null;
+  }
+
+  openDatePicker(): void {
+    const input = document.getElementById('expires-in-days') as HTMLInputElement;
+    input?.showPicker?.();
+  }
+
+  private toDateString(daysFromNow: number): string {
+    const d = new Date();
+    d.setDate(d.getDate() + daysFromNow);
+    return d.toISOString().split('T')[0];
   }
 }
