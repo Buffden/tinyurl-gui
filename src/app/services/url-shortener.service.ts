@@ -9,9 +9,11 @@ export interface ShortenResponse {
 
 @Injectable({ providedIn: 'root' })
 export class UrlShortenerService {
+  private readonly apiUrl = environment.apiUrl;
+
   constructor(private http: HttpClient) {}
 
   shortenUrl(data: { url: string; expiresInDays?: number }): Observable<ShortenResponse> {
-    return this.http.post<ShortenResponse>(`${environment.apiUrl}/urls`, data);
+    return this.http.post<ShortenResponse>(`${this.apiUrl}/urls`, data);
   }
 }
