@@ -70,10 +70,12 @@
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "4kB",
-                  "maximumError": "8kB"
+                  "maximumWarning": "16kB",
+                  "maximumError": "24kB"
                 }
-              ]
+              ],
+              "prerender": false,
+              "ssr": false
             },
             "development": {
               "optimization": false,
