@@ -143,6 +143,7 @@
 		height: 100vh;
 		min-height: 100vh;
 		overflow: hidden;
+		position: relative;
 	}
 	.hero-bg {
 		padding: 1.25rem 0;
@@ -187,6 +188,13 @@
 	}
 	.hero-container {
 		gap: 1.25rem;
+	}
+	.scroll-indicator {
+		position: absolute;
+		bottom: 15vh;
+		left: 0;
+		right: 0;
+		flex: unset;
 	}
 }
 

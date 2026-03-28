@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatTabsModule } from '@angular/material/tabs';
@@ -13,6 +13,13 @@ import { UrlShortenerService, ShortenResponse } from '../../services/url-shorten
   styleUrl: './hero.component.scss'
 })
 export class HeroComponent {
+  showScrollIndicator = true;
+
+  @HostListener('window:scroll')
+  onScroll(): void {
+    this.showScrollIndicator = window.scrollY < window.innerHeight * 0.8;
+  }
+
   // Shorten tab state
   longUrl = '';
   expiresInDays: number | null = null;
