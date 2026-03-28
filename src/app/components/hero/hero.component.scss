@@ -98,9 +98,15 @@
 	line-height: 1.1;
 	margin-bottom: 0.5rem;
 }
+.hero__line {
+	display: block;
+	line-height: 1.2;
+}
 .shorten-bold, .simplify-bold, .succeed-bold {
 	font-family: 'Montserrat', Arial, sans-serif;
 	font-weight: 800;
+	display: block;
+	opacity: 0;
 }
 .shorten-bold { color: #181c32; }
 .simplify-bold { color: #7b3aed; }
@@ -110,6 +116,7 @@
 	font-size: 1.1rem;
 	font-weight: 500;
 	margin-top: 0.5rem;
+	opacity: 0;
 }
 .hero__right--fixed {
 	width: 420px;
@@ -117,6 +124,7 @@
 	max-width: 480px;
 	display: flex;
 	justify-content: flex-end;
+	opacity: 0;
 }
 
 @media (max-width: 768px) {
@@ -140,9 +148,10 @@
 	}
 
 	.hero {
-		height: 80vh;
-		min-height: 80vh;
+		height: 100vh;
+		min-height: 100vh;
 		overflow: hidden;
+		position: relative;
 	}
 	.hero-bg {
 		padding: 1.25rem 0;
@@ -187,6 +196,13 @@
 	}
 	.hero-container {
 		gap: 1.25rem;
+	}
+	.scroll-indicator {
+		position: absolute;
+		bottom: 15vh;
+		left: 0;
+		right: 0;
+		flex: unset;
 	}
 }
 

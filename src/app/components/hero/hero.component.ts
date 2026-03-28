@@ -1,18 +1,46 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { QRCodeComponent } from 'angularx-qrcode';
 import { UrlShortenerService, ShortenResponse } from '../../services/url-shortener.service';
+import { trigger, state, transition, style, animate } from '@angular/animations';
+
+const revealLine = (delay: number) =>
+  trigger(`revealLine${delay}`, [
+    state('hidden', style({ opacity: 0, transform: 'translateY(28px)', filter: 'blur(6px)' })),
+    state('visible', style({ opacity: 1, transform: 'translateY(0)', filter: 'blur(0)' })),
+    transition('hidden => visible', animate(`1500ms ${delay}ms cubic-bezier(0.16, 1, 0.3, 1)`))
+  ]);
+
+const fadeIn = (delay: number) =>
+  trigger(`fadeIn${delay}`, [
+    state('hidden', style({ opacity: 0 })),
+    state('visible', style({ opacity: 1 })),
+    transition('hidden => visible', animate(`700ms ${delay}ms ease-in-out`))
+  ]);
 
 @Component({
   selector: 'app-hero',
   imports: [CommonModule, MatTabsModule, MatExpansionModule, FormsModule, QRCodeComponent],
   templateUrl: './hero.component.html',
-  styleUrl: './hero.component.scss'
+  styleUrl: './hero.component.scss',
+  animations: [revealLine(0), revealLine(250), revealLine(500), fadeIn(900), fadeIn(1100)]
 })
-export class HeroComponent {
+export class HeroComponent implements OnInit {
+  showScrollIndicator = true;
+  animState: 'hidden' | 'visible' = 'hidden';
+
+  ngOnInit(): void {
+    setTimeout(() => { this.animState = 'visible'; });
+  }
+
+  @HostListener('window:scroll')
+  onScroll(): void {
+    this.showScrollIndicator = window.scrollY < window.innerHeight * 0.8;
+  }
+
   // Shorten tab state
   longUrl = '';
   expiresInDays: number | null = null;

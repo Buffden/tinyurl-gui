@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { trigger, state, transition, style, animate } from '@angular/animations';
 
 interface FaqItem {
   question: string;
@@ -11,9 +12,21 @@ interface FaqItem {
   selector: 'app-faq',
   imports: [CommonModule],
   templateUrl: './faq.component.html',
-  styleUrl: './faq.component.scss'
+  styleUrl: './faq.component.scss',
+  animations: [
+    trigger('fadeIn', [
+      state('hidden', style({ opacity: 0, transform: 'translateY(28px)', filter: 'blur(6px)' })),
+      state('visible', style({ opacity: 1, transform: 'translateY(0)', filter: 'blur(0)' })),
+      transition('hidden => visible', animate('1500ms cubic-bezier(0.16, 1, 0.3, 1)'))
+    ])
+  ]
 })
-export class FaqComponent {
+export class FaqComponent implements OnInit {
+  animState: 'hidden' | 'visible' = 'hidden';
+
+  ngOnInit(): void {
+    setTimeout(() => { this.animState = 'visible'; }, 1800);
+  }
   items: FaqItem[] = [
     {
       question: 'What is a short URL and how does it work?',

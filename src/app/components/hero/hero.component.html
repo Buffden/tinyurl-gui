@@ -4,14 +4,14 @@
             <div class="hero-container">
                 <div class="hero__left hero__left--fixed">
                     <h1 class="hero__shorten-title">
-                        <span class="shorten-bold">SHORTEN.</span><br />
-                        <span class="simplify-bold">SIMPLIFY.</span><br />
-                        <span class="succeed-bold">SUCCEED.</span>
+                        <span class="hero__line"><span [@revealLine0]="animState" class="shorten-bold">SHORTEN.</span></span>
+                        <span class="hero__line"><span [@revealLine250]="animState" class="simplify-bold">SIMPLIFY.</span></span>
+                        <span class="hero__line"><span [@revealLine500]="animState" class="succeed-bold">SUCCEED.</span></span>
                     </h1>
-                    <p class="hero__subtitle">Transform long, cluttered URLs into high-end digital shortcuts with
+                    <p [@fadeIn900]="animState" class="hero__subtitle">Transform long, cluttered URLs into high-end digital shortcuts with
                         surgical precision.</p>
                 </div>
-                <div class="hero__right hero__right--fixed">
+                <div [@fadeIn1100]="animState" class="hero__right hero__right--fixed">
                     <mat-tab-group class="shorten-tabs" mat-stretch-tabs>
 
                         <!-- Shorten a Link -->
@@ -179,7 +179,7 @@
         </section>
     </div>
 
-    <div class="scroll-indicator">
+    <div class="scroll-indicator" *ngIf="showScrollIndicator">
         <span class="scroll-indicator__chevron material-symbols-outlined">expand_more</span>
     </div>
 </section>
