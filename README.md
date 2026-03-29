@@ -1,6 +1,6 @@
 # TinyURL GUI
 
-Angular 19 frontend for the TinyURL service. Provides a UI for shortening URLs, with QR code generation and an FAQ page.
+Angular 19 frontend for the TinyURL service. Provides a UI for shortening URLs with QR code generation.
 
 - **Live:** [tinyurl.buffden.com](https://tinyurl.buffden.com)
 - **Backend API:** [go.buffden.com](https://go.buffden.com)
@@ -14,48 +14,41 @@ Angular 19 frontend for the TinyURL service. Provides a UI for shortening URLs, 
 - Angular 19 with SSR (`@angular/ssr`)
 - Angular Material 19
 - QR code generation (`angularx-qrcode`)
-- Nginx (dev proxy + production serving)
 
 ---
 
 ## Running Locally
 
-### Dev server (proxies API to backend)
+### Dev server via Docker (recommended)
+
+```bash
+npm run start:docker
+```
+
+Runs the Angular dev server in a container with live reload. The backend Docker stack must already be running (start it from the repo root with `docker compose up`).
+
+### Dev server (native)
 
 ```bash
 npm install
 npm start
 ```
 
-App runs at `http://localhost:4200`. API calls are proxied to `http://localhost:8080` via `proxy.conf.json`.
-
-> The backend stack must be running. Start it from the repo root with `docker compose up`.
-
-### Dev server via Docker
-
-```bash
-npm run start:docker
-```
-
-This runs the Angular dev server in a container with live reload. Requires the backend network (`tinyurl_public`) to already exist.
+App runs at `http://localhost:4200`. API calls are proxied to the backend Nginx container — requires the Docker stack to be running.
 
 ---
 
 ## Building
 
-### Development build (watch mode)
-
 ```bash
+# Production build
+npm run build
+
+# Development build with watch
 npm run build -- --watch --configuration development
 ```
 
-### Production build
-
-```bash
-npm run build
-```
-
-Output is in `dist/`.
+Output goes to `dist/`.
 
 ---
 
@@ -68,22 +61,6 @@ npm test
 # Lint
 npm run lint
 
-# Lint with auto-fix
-npm run lint:fix
-
 # Format check
 npm run format:check
-
-# Format
-npm run format
 ```
-
----
-
-## Environments
-
-| Environment | Command | URL |
-| --- | --- | --- |
-| Local dev (native) | `npm start` | `http://localhost:4200` |
-| Local dev (Docker) | `npm run start:docker` | `http://localhost:4200` |
-| Production | Deployed via GitHub Actions to S3 + CloudFront | [tinyurl.buffden.com](https://tinyurl.buffden.com) |
