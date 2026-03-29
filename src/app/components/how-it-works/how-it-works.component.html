@@ -1,0 +1,18 @@
+<section [@fadeIn]="animState" class="hiw-section">
+  <div class="hiw-header">
+    <h2 class="hiw-title">How It Works</h2>
+    <p class="hiw-subtitle">Shorten any URL in three simple steps — no account required.</p>
+  </div>
+
+  <div class="hiw-steps">
+    <div class="hiw-step" *ngFor="let step of steps; let last = last">
+      <div class="hiw-step__number">{{ step.number }}</div>
+      <div class="hiw-step__icon-wrap">
+        <span class="material-symbols-outlined hiw-step__icon">{{ step.icon }}</span>
+      </div>
+      <h3 class="hiw-step__title">{{ step.title }}</h3>
+      <p class="hiw-step__desc">{{ step.description }}</p>
+      <div class="hiw-step__connector" *ngIf="!last"></div>
+    </div>
+  </div>
+</section>

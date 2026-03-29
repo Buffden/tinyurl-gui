@@ -2,10 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import { HeroComponent } from "../../components/hero/hero.component";
 import { FaqComponent } from "../../components/faq/faq.component";
+import { HowItWorksComponent } from "../../components/how-it-works/how-it-works.component";
+import { FeaturesComponent } from "../../components/features/features.component";
 
 @Component({
   selector: 'app-home',
-  imports: [HeroComponent, FaqComponent],
+  imports: [HeroComponent, FaqComponent, HowItWorksComponent, FeaturesComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })

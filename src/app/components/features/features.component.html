@@ -1,0 +1,16 @@
+<section [@fadeIn]="animState" class="features-section">
+  <div class="features-header">
+    <h2 class="features-title">Why Use TinyURL?</h2>
+    <p class="features-subtitle">Everything you need to shorten, share, and track links — built for speed and reliability.</p>
+  </div>
+
+  <div class="features-grid">
+    <div class="feature-card" *ngFor="let feature of features" [class]="'feature-card--' + feature.color">
+      <div class="feature-card__icon-wrap">
+        <span class="material-symbols-outlined feature-card__icon">{{ feature.icon }}</span>
+      </div>
+      <h3 class="feature-card__title">{{ feature.title }}</h3>
+      <p class="feature-card__desc">{{ feature.description }}</p>
+    </div>
+  </div>
+</section>
