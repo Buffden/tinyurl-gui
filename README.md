@@ -1,59 +1,89 @@
-# TinyurlGui
+# TinyURL GUI
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.0.2.
+Angular 19 frontend for the TinyURL service. Provides a UI for shortening URLs, with QR code generation and an FAQ page.
 
-## Development server
+- **Live:** [tinyurl.buffden.com](https://tinyurl.buffden.com)
+- **Backend API:** [go.buffden.com](https://go.buffden.com)
 
-To start a local development server, run:
+![Demo](docs/demo/tinyurl-demo.gif)
+
+---
+
+## Stack
+
+- Angular 19 with SSR (`@angular/ssr`)
+- Angular Material 19
+- QR code generation (`angularx-qrcode`)
+- Nginx (dev proxy + production serving)
+
+---
+
+## Running Locally
+
+### Dev server (proxies API to backend)
 
 ```bash
-ng serve
+npm install
+npm start
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+App runs at `http://localhost:4200`. API calls are proxied to `http://localhost:8080` via `proxy.conf.json`.
 
-## Code scaffolding
+> The backend stack must be running. Start it from the repo root with `docker compose up`.
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+### Dev server via Docker
 
 ```bash
-ng generate component component-name
+npm run start:docker
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+This runs the Angular dev server in a container with live reload. Requires the backend network (`tinyurl_public`) to already exist.
 
-```bash
-ng generate --help
-```
+---
 
 ## Building
 
-To build the project run:
+### Development build (watch mode)
 
 ```bash
-ng build
+npm run build -- --watch --configuration development
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+### Production build
 
 ```bash
-ng test
+npm run build
 ```
 
-## Running end-to-end tests
+Output is in `dist/`.
 
-For end-to-end (e2e) testing, run:
+---
+
+## Tests & Linting
 
 ```bash
-ng e2e
+# Unit tests
+npm test
+
+# Lint
+npm run lint
+
+# Lint with auto-fix
+npm run lint:fix
+
+# Format check
+npm run format:check
+
+# Format
+npm run format
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+---
 
-## Additional Resources
+## Environments
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+| Environment | Command | URL |
+| --- | --- | --- |
+| Local dev (native) | `npm start` | `http://localhost:4200` |
+| Local dev (Docker) | `npm run start:docker` | `http://localhost:4200` |
+| Production | Deployed via GitHub Actions to S3 + CloudFront | [tinyurl.buffden.com](https://tinyurl.buffden.com) |
