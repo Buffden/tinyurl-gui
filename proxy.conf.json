@@ -3,6 +3,6 @@
     "target": "http://tinyurl-nginx:80",
     "secure": false,
     "changeOrigin": true,
-    "logLevel": "debug"
+    "logLevel": "warn"
   }
 }
