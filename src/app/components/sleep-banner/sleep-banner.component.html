@@ -1,0 +1,13 @@
+@if (visible) {
+  <div class="sleep-banner" role="status" aria-live="polite">
+    <span class="material-symbols-outlined sleep-banner__icon">bedtime</span>
+    <span class="sleep-banner__text">
+      <strong>Service unavailable.</strong>
+      This service runs <strong>Mon–Fri, 7 AM–11 PM CDT</strong> to reduce cloud costs.
+      Link shortening and QR generation are disabled outside working hours.
+    </span>
+    <button class="sleep-banner__close" (click)="dismiss()" aria-label="Dismiss notification">
+      <span class="material-symbols-outlined">close</span>
+    </button>
+  </div>
+}

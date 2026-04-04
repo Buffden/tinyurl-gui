@@ -33,7 +33,7 @@
                                             placeholder="Paste long URL here"
                                             autocomplete="off"
                                             [(ngModel)]="longUrl"
-                                            [disabled]="loading || !!shortUrl" />
+                                            [disabled]="loading || !!shortUrl || sleep.isAsleep" />
                                     </div>
                                     <div class="shorten-card__field">
                                         <label class="shorten-card__label" for="expires-in-days">Expiry (days, optional)</label>
@@ -45,7 +45,7 @@
                                                 max="3650"
                                                 placeholder="e.g. 30"
                                                 [(ngModel)]="expiresInDays"
-                                                [disabled]="loading || !!shortUrl" />
+                                                [disabled]="loading || !!shortUrl || sleep.isAsleep" />
                                             <input class="date-input-hidden"
                                                 id="date-picker-hidden"
                                                 type="date"
@@ -85,7 +85,7 @@
                                             </button>
                                         </div>
                                     </div>
-                                    <button class="shorten-card__main-btn" (click)="onShorten()" [disabled]="loading">
+                                    <button class="shorten-card__main-btn" (click)="onShorten()" [disabled]="loading || sleep.isAsleep">
                                         <img *ngIf="!loading" width="22" height="22" src="https://img.icons8.com/glyph-neue/64/fantasy--v1.png" alt="" class="btn-icon" />
                                         <span *ngIf="!loading">{{ shortUrl ? 'Shorten Another Link' : 'Shorten Link' }}</span>
                                         <span *ngIf="loading">Shortening...</span>
@@ -116,7 +116,8 @@
                                             type="text"
                                             placeholder="Paste any URL here"
                                             autocomplete="off"
-                                            [(ngModel)]="qrUrl" />
+                                            [(ngModel)]="qrUrl"
+                                            [disabled]="sleep.isAsleep" />
                                     </div>
 
                                     <div *ngIf="qrGenerated" class="qr-result-layout">
@@ -162,7 +163,7 @@
                                     </div>
 
                                     <div *ngIf="qrError" class="shorten-card__error">{{ qrError }}</div>
-                                    <button class="shorten-card__main-btn" (click)="onGenerateQr()">
+                                    <button class="shorten-card__main-btn" (click)="onGenerateQr()" [disabled]="sleep.isAsleep">
                                         <span class="material-symbols-outlined btn-icon">qr_code</span>
                                         {{ qrGenerated ? 'Generate Another QR' : 'Generate QR Code' }}
                                     </button>
