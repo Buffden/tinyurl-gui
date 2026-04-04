@@ -5,6 +5,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { QRCodeComponent } from 'angularx-qrcode';
 import { UrlShortenerService, ShortenResponse } from '../../services/url-shortener.service';
+import { SleepService } from '../../services/sleep.service';
 import { trigger, state, transition, style, animate } from '@angular/animations';
 
 const revealLine = (delay: number) =>
@@ -58,7 +59,10 @@ export class HeroComponent implements OnInit {
   qrLoading = false;
   qrError: string | null = null;
 
-  constructor(private urlShortener: UrlShortenerService) {}
+  constructor(
+    private urlShortener: UrlShortenerService,
+    readonly sleep: SleepService
+  ) {}
 
   onShorten() {
     this.error = null;
