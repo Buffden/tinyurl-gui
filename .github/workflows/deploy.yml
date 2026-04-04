@@ -57,6 +57,7 @@ jobs:
         run: |
           CF_DIST_ID=$(aws ssm get-parameter \
             --name "/tinyurl/cicd/cf-dist-id" \
+            --with-decryption \
             --query "Parameter.Value" --output text)
           echo "CF_DIST_ID<<EOF" >> $GITHUB_ENV
           echo "$CF_DIST_ID" >> $GITHUB_ENV
