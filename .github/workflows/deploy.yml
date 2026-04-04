@@ -59,9 +59,8 @@ jobs:
             --name "/tinyurl/cicd/cf-dist-id" \
             --with-decryption \
             --query "Parameter.Value" --output text)
-          echo "CF_DIST_ID<<EOF" >> $GITHUB_ENV
-          echo "$CF_DIST_ID" >> $GITHUB_ENV
-          echo "EOF" >> $GITHUB_ENV
+          echo "::add-mask::$CF_DIST_ID"
+          echo "CF_DIST_ID=$CF_DIST_ID" >> $GITHUB_ENV
 
       - name: Upload hashed assets to S3 (long cache)
         run: |
