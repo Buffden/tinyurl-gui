@@ -76,11 +76,19 @@ export class HeroComponent implements OnInit {
       return;
     }
     if (!this.longUrl.trim()) {
-      this.error = 'Please enter a valid URL.';
+      this.error = 'Please enter a URL.';
       return;
     }
-    if (this.longUrl.length > 2048) {
-      this.error = 'URL must be 2048 characters or fewer.';
+    if (this.longUrl.length >= 2048) {
+      this.error = 'URL must be fewer than 2048 characters.';
+      return;
+    }
+    if (!this.isValidUrl(this.longUrl.trim())) {
+      this.error = 'Please enter a valid URL starting with http:// or https://.';
+      return;
+    }
+    if (this.expiresInDays !== null && (isNaN(this.expiresInDays) || !Number.isInteger(this.expiresInDays) || this.expiresInDays < 1 || this.expiresInDays > 3650)) {
+      this.error = 'Expiry must be a whole number between 1 and 3650.';
       return;
     }
     this.loading = true;
@@ -106,11 +114,15 @@ export class HeroComponent implements OnInit {
     this.qrGenerated = null;
     this.qrShortUrl = null;
     if (!this.qrUrl.trim()) {
-      this.qrError = 'Please enter a valid URL.';
+      this.qrError = 'Please enter a URL.';
       return;
     }
-    if (this.qrUrl.length > 2048) {
-      this.qrError = 'URL must be 2048 characters or fewer.';
+    if (this.qrUrl.length >= 2048) {
+      this.qrError = 'URL must be fewer than 2048 characters.';
+      return;
+    }
+    if (!this.isValidUrl(this.qrUrl.trim())) {
+      this.qrError = 'Please enter a valid URL starting with http:// or https://.';
       return;
     }
     this.qrLoading = true;
@@ -184,6 +196,15 @@ export class HeroComponent implements OnInit {
   openDatePicker(): void {
     const input = document.getElementById('expires-in-days') as HTMLInputElement;
     input?.showPicker?.();
+  }
+
+  private isValidUrl(url: string): boolean {
+    try {
+      const { protocol } = new URL(url);
+      return protocol === 'http:' || protocol === 'https:';
+    } catch {
+      return false;
+    }
   }
 
   private toDateString(daysFromNow: number): string {
