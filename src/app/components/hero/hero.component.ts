@@ -42,6 +42,8 @@ export class HeroComponent implements OnInit {
     this.showScrollIndicator = window.scrollY < window.innerHeight * 0.8;
   }
 
+  selectedTab = 0;
+
   // Shorten tab state
   longUrl = '';
   expiresInDays: number | null = null;
@@ -77,6 +79,10 @@ export class HeroComponent implements OnInit {
       this.error = 'Please enter a valid URL.';
       return;
     }
+    if (this.longUrl.length > 2048) {
+      this.error = 'URL must be 2048 characters or fewer.';
+      return;
+    }
     this.loading = true;
     const req = {
       url: this.longUrl.trim(),
@@ -103,16 +109,21 @@ export class HeroComponent implements OnInit {
       this.qrError = 'Please enter a valid URL.';
       return;
     }
-    this.qrGenerated = this.qrUrl.trim();
+    if (this.qrUrl.length > 2048) {
+      this.qrError = 'URL must be 2048 characters or fewer.';
+      return;
+    }
     this.qrLoading = true;
     this.urlShortener.shortenUrl({ url: this.qrUrl.trim() }).subscribe({
       next: (res: ShortenResponse) => {
         this.qrShortUrl = res.shortUrl;
         this.shortUrl = res.shortUrl;
         this.longUrl = this.qrUrl.trim();
+        this.qrGenerated = res.shortUrl;
         this.qrLoading = false;
       },
-      error: () => {
+      error: (err) => {
+        this.qrError = err?.error?.message || 'Failed to shorten URL.';
         this.qrLoading = false;
       }
     });

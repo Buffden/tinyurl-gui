@@ -13,7 +13,7 @@
                         surgical precision.</p>
                 </div>
                 <div [@fadeIn1100]="animState" class="hero__right hero__right--fixed">
-                    <mat-tab-group class="shorten-tabs" mat-stretch-tabs>
+                    <mat-tab-group class="shorten-tabs" mat-stretch-tabs [(selectedIndex)]="selectedTab">
 
                         <!-- Shorten a Link -->
                         <mat-tab>
@@ -32,6 +32,7 @@
                                             type="text"
                                             placeholder="Paste long URL here"
                                             autocomplete="off"
+                                            maxlength="2048"
                                             [(ngModel)]="longUrl"
                                             [disabled]="loading || !!shortUrl || sleep.isAsleep" />
                                     </div>
@@ -79,7 +80,7 @@
                                                 <span class="material-symbols-outlined action-icon">open_in_new</span>
                                                 <span class="action-label">Visit</span>
                                             </button>
-                                            <button class="shorten-card__action-tile" title="QR Code">
+                                            <button class="shorten-card__action-tile" (click)="selectedTab = 1; qrUrl = longUrl" title="QR Code">
                                                 <span class="material-symbols-outlined action-icon">qr_code</span>
                                                 <span class="action-label">QR</span>
                                             </button>
@@ -116,6 +117,7 @@
                                             type="text"
                                             placeholder="Paste any URL here"
                                             autocomplete="off"
+                                            maxlength="2048"
                                             [(ngModel)]="qrUrl"
                                             [disabled]="sleep.isAsleep" />
                                     </div>
